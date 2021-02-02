@@ -211,7 +211,18 @@ class LinkedList {
   /** average(): return an average of all values in the list */
 
   average() {
+    /* special case if linked-list is empty return 0 */
+    if (this.length === 0) return 0;
 
+    let currentNode = this.head;
+    let accumulated = 0;
+    let count = 0
+    while (count < this.length) {
+      accumulated += currentNode.val;
+      currentNode = currentNode.next;
+      count += 1;
+    }
+    return accumulated / this.length;
   }
 }
 

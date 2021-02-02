@@ -168,6 +168,11 @@ describe("average", function() {
     expect(lst.average()).toBeCloseTo(4.1429, 4);
   });
 
+  it("calculates the average of items in a list of length 1", function() {
+    let lst = new LinkedList([2]);
+    expect(lst.average()).toEqual(2);
+  });
+
   it("returns 0 for empty lists", function() {
     let lst = new LinkedList();
     expect(lst.average()).toBe(0);
