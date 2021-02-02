@@ -93,37 +93,126 @@ class LinkedList {
   /** getAt(idx): get val at idx. */
 
   getAt(idx) {
-
+    if (idx >= this.length) return undefined;
+    let currentIdx = 0;
+    let currentNode = this.head;
+    while (currentIdx !== idx) {
+      currentNode = currentNode.next;
+      currentIdx += 1;
+    }
+    return currentNode.val;
   }
 
   /** setAt(idx, val): set val at idx to val */
 
   setAt(idx, val) {
-
+    if (idx >= this.length) return undefined;
+    let currentIdx = 0;
+    let currentNode = this.head;
+    while (currentIdx !== idx) {
+      currentNode = currentNode.next;
+      currentIdx += 1;
+    }
+    return currentNode.val = val;
   }
 
   /** insertAt(idx, val): add node w/val before idx. */
 
   insertAt(idx, val) {
+    let newestNode = new Node(val);
+
+    // if the linked-list is empty, just add the new node
+    if (this.length === 0) {
+      this.head = newestNode;
+      this.tail = newestNode;
+      this.length += 1;
+      return this;
+    }
+
+    /* if the idx of the insertion is longer than the linked-list,
+      add the value to the end of the linked-list */
+    if (idx >= this.length) {
+      let currentNode = this.head;
+      while (currentNode.next) {
+        currentNode = currentNode.next;
+      }
+      currentNode.next = newestNode;
+      this.tail = newestNode;
+      this.length += 1;
+      return this;
+    }
+
+    /* otherwise, the value is being added somewhere
+      in the middle of the linked-list */
+    let currentIdx = 0;
+    let currentNode = this.head;
+
+    while (currentIdx !== idx - 1) {
+      currentNode = currentNode.next;
+      currentIdx += 1;
+    }
+
+    newestNode.next = currentNode.next
+    currentNode.next = newestNode;
+    this.tail = currentNode.next;
+
+    this.length += 1;
 
   }
 
   /** removeAt(idx): return & remove item at idx, */
 
   removeAt(idx) {
+    // if the index is not within the linked-list, return undefined
+    if (idx >= this.length) return undefined;
 
+    /* if the list is only 1 node long and that node idx is requested
+      for removal, set values to null and 0 */
+    if (idx === 0 && this.length <= 1) {
+      this.head = null;
+      this.tail = null;
+      this.length = 0;
+      return undefined;
+    }
+
+    // special case: removes head value on multi-valued linked-list
+    if (idx === 0) {
+      this.head = this.head.next;
+      this.length -= 1;
+      return this;
+    }
+
+    // special case: removes tail value on multi-valued linked-list
+    if (idx === this.length - 1) {
+      let currentNode = this.head;
+      let currentIdx = 0;
+      while(currentIdx + 1 < idx) {
+        currentNode = currentNode.next;
+        currentIdx += 1;
+      }
+      currentNode.next = null;
+      this.tail = currentNode;
+      this.length -= 1;
+      return this;
+    }
+
+    // collection of ending nodes
+    let currentNode = this.head;
+    let currentIdx = 0;
+    while(currentIdx < idx) {
+      currentNode = currentNode.next;
+      currentIdx += 1;
+    }
+    currentNode.next = currentNode.next.next;
+    this.length -= 1;
+    return this;
   }
 
   /** average(): return an average of all values in the list */
 
   average() {
-    
+
   }
 }
 
 module.exports = LinkedList;
-
-let lst = new LinkedList();
-lst.push(3)
-lst.push(5)
-lst.pop() 
