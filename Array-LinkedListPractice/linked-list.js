@@ -53,7 +53,7 @@ class LinkedList {
   /** pop(): return & remove last item. */
 
   pop() {
-    if (this.length === 0) return undefined;
+    if (this.length === 0) throw 'Linked-list is empty.';
 
     const toBePoped = this.tail.val
     if (this.length === 1) {
@@ -76,7 +76,7 @@ class LinkedList {
   /** shift(): return & remove first item. */
 
   shift() {
-    if (this.length === 0) return undefined;
+    if (this.length === 0) throw 'Linked-list is empty.';
 
     const toBeRemoved = this.head.val;
     if (this.length === 1) {
@@ -93,7 +93,7 @@ class LinkedList {
   /** getAt(idx): get val at idx. */
 
   getAt(idx) {
-    if (idx >= this.length) return undefined;
+    if (idx >= this.length) throw "Invalid index.";
     let currentIdx = 0;
     let currentNode = this.head;
     while (currentIdx !== idx) {
@@ -106,7 +106,7 @@ class LinkedList {
   /** setAt(idx, val): set val at idx to val */
 
   setAt(idx, val) {
-    if (idx >= this.length) return undefined;
+    if (idx >= this.length) throw "Invalid index.";
     let currentIdx = 0;
     let currentNode = this.head;
     while (currentIdx !== idx) {
@@ -126,7 +126,7 @@ class LinkedList {
       this.head = newestNode;
       this.tail = newestNode;
       this.length += 1;
-      return this;
+      return;
     }
 
     /* if the idx of the insertion is longer than the linked-list,
@@ -139,7 +139,7 @@ class LinkedList {
       currentNode.next = newestNode;
       this.tail = newestNode;
       this.length += 1;
-      return this;
+      return;
     }
 
     /* otherwise, the value is being added somewhere
@@ -157,14 +157,13 @@ class LinkedList {
     this.tail = currentNode.next;
 
     this.length += 1;
-
   }
 
   /** removeAt(idx): return & remove item at idx, */
 
   removeAt(idx) {
-    // if the index is not within the linked-list, return undefined
-    if (idx >= this.length) return undefined;
+    // if the index is not within the linked-list, throw error
+    if (idx >= this.length) throw 'Invalid index.'
 
     /* if the list is only 1 node long and that node idx is requested
       for removal, set values to null and 0 */

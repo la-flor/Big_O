@@ -60,6 +60,13 @@ describe("pop", function() {
     expect(lst.head).toBe(null);
     expect(lst.length).toBe(0);
   });
+
+  it("throws error when empty list is used", function() {
+    let lst = new LinkedList([]);
+
+    expect(() => lst.pop()).toThrow();
+  })
+
 });
 
 describe("shift", function() {
@@ -75,6 +82,12 @@ describe("shift", function() {
     expect(lst.head).toBe(null);
     expect(lst.length).toBe(0);
   });
+
+  it("throws error when empty list is used", function() {
+    let lst = new LinkedList([]);
+
+    expect(() => lst.shift()).toThrow();
+  })
 });
 
 describe("getAt", function() {
@@ -84,6 +97,12 @@ describe("getAt", function() {
     expect(lst.getAt(0)).toBe(5);
     expect(lst.getAt(1)).toBe(10);
   });
+
+  it("throws error for invalid index", function() {
+    let lst = new LinkedList([]);
+
+    expect(() => lst.getAt()).toThrow();
+  })
 });
 
 describe("setAt", function() {
@@ -95,6 +114,12 @@ describe("setAt", function() {
     expect(lst.head.val).toBe(1);
     expect(lst.head.next.val).toBe(2);
   });
+
+  it("throws error for invalid index", function() {
+    let lst = new LinkedList([]);
+
+    expect(() => lst.setAt()).toThrow();
+  })
 });
 
 describe("insertAt", function() {
@@ -122,6 +147,7 @@ describe("insertAt", function() {
     expect(lst.head.val).toBe(5);
     expect(lst.tail.val).toBe(5);
   });
+
 });
 
 describe("removeAt", function() {
@@ -160,6 +186,12 @@ describe("removeAt", function() {
     expect(lst.head.val).toBe("a");
     expect(lst.tail.val).toBe("b");
   });
+
+  it("throws error for invalid index", function() {
+    let lst = new LinkedList([1,2,3]);
+
+    expect(() => lst.removeAt(5)).toThrow();
+  })
 });
 
 describe("average", function() {
