@@ -34,7 +34,7 @@ describe("dequeue", function() {
   });
 
   it("throws an error if the queue is empty", function() {
-    expect(() => queue.dequeue()).toThrow(Error);
+    expect(() => queue.dequeue()).toThrow();
   });
 });
 
