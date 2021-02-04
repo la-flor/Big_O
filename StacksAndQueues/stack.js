@@ -65,7 +65,3 @@ class Stack {
 }
 
 module.exports = Stack;
-
-// stack = new Stack();
-// stack.push(100);
-// stack.push(200)
