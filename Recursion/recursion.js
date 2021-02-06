@@ -42,21 +42,37 @@ function findIndex(arr, val, idx = 0) {
 
 /** revString: return a copy of a string, but in reverse. */
 
-function revString(str) {
-
+function revString(str, idx = str.length - 1, acc = "") {
+  if (idx < 0) return acc;
+  acc += str[idx];
+  return revString(str, idx -1, acc);
 }
 
 /** gatherStrings: given an object, return an array of all of the string values. */
 
 function gatherStrings(obj) {
-
+  let acc = [];
+  for (let key in obj) {
+    if (typeof obj[key] === "string") acc.push(obj[key]);
+    if (typeof obj[key] === "object") acc.push(...gatherStrings(obj[key]));
+  }
+  return acc;
 }
 
 /** binarySearch: given a sorted array of numbers, and a value,
- * return the index of that value (or -1 if val is not present). */
+ * return the index of that value (or -1 if val is not present).
+ * This algorithm should run in O(log(N)) time */
 
-function binarySearch(arr, val) {
+function binarySearch(arr, val, leftIdx = 0, rightIdx = arr.length) {
+  if (leftIdx > rightIdx) return -1;
+  
+  let middleIdx = Math.floor((rightIdx + leftIdx) / 2);
+  
+  if (arr[middleIdx] === val) return middleIdx;
 
+  if (arr[middleIdx] > val) return binarySearch(arr, val, leftIdx, middleIdx - 1);
+
+  return binarySearch(arr, val, middleIdx + 1, rightIdx);
 }
 
 module.exports = {
