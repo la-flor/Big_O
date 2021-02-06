@@ -26,14 +26,18 @@ function everyOther(str, idx = 0, acc = "") {
 
 /** isPalindrome: checks whether a string is a palindrome or not. */
 
-function isPalindrome(str) {
-
+function isPalindrome(str, idx = str.length - 1, acc = "") {
+  if (idx < 0) return acc === str;
+  acc += str[idx];
+  return isPalindrome(str, idx - 1, acc);
 }
 
 /** findIndex: return the index of val in arr (or -1 if val is not present). */
 
-function findIndex(arr, val) {
-
+function findIndex(arr, val, idx = 0) {
+  if (idx === arr.length) return -1;
+  if (arr[idx] === val) return idx;
+  return findIndex(arr, val, idx + 1);
 }
 
 /** revString: return a copy of a string, but in reverse. */
