@@ -114,61 +114,67 @@ class BinarySearchTree {
 
   /** dfsPreOrder(): Traverse the array using pre-order DFS.
    * Return an array of visited nodes. */
+  
+  dfsPreOrder(node = this.root, acc = []) {
+    if (!this.root) return;
 
-  dfsPreOrder() {
-
+    acc.push(node.val)
+    if (node.left) this.dfsPreOrder(node.left, acc);
+    if (node.right) this.dfsPreOrder(node.right, acc);
+    return acc;
   }
 
   /** dfsInOrder(): Traverse the array using in-order DFS.
    * Return an array of visited nodes. */
 
   dfsInOrder() {
+    if (!this.root) return;
+    let acc = []
 
+    function traverse(node) {
+      if (node.left) traverse(node.left);
+      acc.push(node.val)
+      if (node.right) traverse(node.right);
+    }
+
+    traverse(this.root);
+    return acc;
   }
 
   /** dfsPostOrder(): Traverse the array using post-order DFS.
    * Return an array of visited nodes. */
-
   dfsPostOrder() {
+    if (!this.root) return;
+    let acc = []
 
+    function traverse(node) {
+      if (node.left) traverse(node.left);
+      if (node.right) traverse(node.right);
+      acc.push(node.val)
+    }
+
+    traverse(this.root);
+    return acc;
   }
 
   /** bfs(): Traverse the array using BFS.
    * Return an array of visited nodes. */
 
   bfs() {
+    if (!this.root) return;
+    let node = this.root;
+    let acc = [];
+    let queue = [node];
 
-  }
+    while (queue.length) {
+      node = queue.shift();
+      node.left && queue.push(node.left);
+      node.right && queue.push(node.right);
+      acc.push(node.val);
+    }
 
-  /** Further Study!
-   * remove(val): Removes a node in the BST with the value val.
-   * Returns the removed node. */
-
-  remove(val) {
-
-  }
-
-  /** Further Study!
-   * isBalanced(): Returns true if the BST is balanced, false otherwise. */
-
-  isBalanced() {
-
-  }
-
-  /** Further Study!
-   * findSecondHighest(): Find the second highest value in the BST, if it exists.
-   * Otherwise return undefined. */
-
-  findSecondHighest() {
-    
+    return acc;
   }
 }
 
-// var binarySearchTree = new BinarySearchTree();
-// binarySearchTree
-//   .insert(15)
-//   .insert(20)
-//   .insert(10)
-//   .insert(12);
-// binarySearchTree.findRecursively(20)
 module.exports = BinarySearchTree;
