@@ -112,7 +112,7 @@ class BinarySearchTree {
     }
   }
 
-  /** dfsPreOrder(): Traverse the array using pre-order DFS.
+  /** dfsPreOrder(): Traverse the array using pre-order Depth First Search.
    * Return an array of visited nodes. */
   
   dfsPreOrder(node = this.root, acc = []) {
@@ -124,7 +124,7 @@ class BinarySearchTree {
     return acc;
   }
 
-  /** dfsInOrder(): Traverse the array using in-order DFS.
+  /** dfsInOrder(): Traverse the array using in-order Depth First Search.
    * Return an array of visited nodes. */
 
   dfsInOrder() {
@@ -141,7 +141,7 @@ class BinarySearchTree {
     return acc;
   }
 
-  /** dfsPostOrder(): Traverse the array using post-order DFS.
+  /** dfsPostOrder(): Traverse the array using post-order Depth First Search.
    * Return an array of visited nodes. */
   dfsPostOrder() {
     if (!this.root) return;
@@ -157,7 +157,7 @@ class BinarySearchTree {
     return acc;
   }
 
-  /** bfs(): Traverse the array using BFS.
+  /** bfs(): Traverse the array using Breath First Search.
    * Return an array of visited nodes. */
 
   bfs() {
