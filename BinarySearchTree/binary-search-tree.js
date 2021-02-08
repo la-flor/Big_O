@@ -15,28 +15,101 @@ class BinarySearchTree {
    * Returns the tree. Uses iteration. */
 
   insert(val) {
+    if (!val) return this;
+    if (!this.root) {
+      this.root = new Node(val);
+      return this;
+    }
 
+    let subject = this.root;
+    while (true) {
+      if (val < subject.val) {
+        if (subject.left === null) {
+          subject.left = new Node(val);
+          return this;
+        }
+        subject = subject.left;
+      } else if (val > subject.val) {
+        if (subject.right === null) {
+          subject.right = new Node(val);
+          return this;
+        } else {
+          subject = subject.right;
+        }
+      }
+    }
   }
 
   /** insertRecursively(val): insert a new node into the BST with value val.
    * Returns the tree. Uses recursion. */
 
   insertRecursively(val) {
+    if (!val) return this;
+    if (!this.root) {
+      this.root = new Node(val);
+      return this;
+    }
 
+    function findInsertionLocation(subject) {
+      if (val > subject.val) {
+        if (subject.right === null) {
+          subject.right = new Node(val);
+          return;
+        } else {
+          findInsertionLocation(subject.right);
+        }
+      }
+
+      if (val < subject.val) {
+        if (subject.left === null) {
+          subject.left = new Node(val);
+          return;
+        } else {
+          findInsertionLocation(subject.left)
+        }
+      }
+    }
+    findInsertionLocation(this.root);
+    return this;
   }
 
   /** find(val): search the tree for a node with value val.
    * return the node, if found; else undefined. Uses iteration. */
 
   find(val) {
+    if (!val) return;
+    if (!this.root) return;
 
+    let subject = this.root;
+    while (true) {
+      if (val === subject.val) return subject;
+
+      if (val > subject.val && subject.right) {
+        subject = subject.right;
+      } else if (val < subject.val && subject.left) {
+        subject = subject.left;
+      } else {
+        return;
+      } 
+    }
   }
 
   /** findRecursively(val): search the tree for a node with value val.
    * return the node, if found; else undefined. Uses recursion. */
 
-  findRecursively(val) {
+  findRecursively(val, node = this.root) {
+    if (!val) return;
+    if (!this.root) return;
 
+    if (node.val === val) {
+      return node;
+    }
+    if (val > node.val && node.right !== null) {
+      return this.findRecursively(val, node.right);
+    }
+    if (val < node.val && node.left !== null) {
+      return this.findRecursively(val, node.left);
+    }
   }
 
   /** dfsPreOrder(): Traverse the array using pre-order DFS.
@@ -91,4 +164,11 @@ class BinarySearchTree {
   }
 }
 
+// var binarySearchTree = new BinarySearchTree();
+// binarySearchTree
+//   .insert(15)
+//   .insert(20)
+//   .insert(10)
+//   .insert(12);
+// binarySearchTree.findRecursively(20)
 module.exports = BinarySearchTree;
