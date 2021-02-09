@@ -4,7 +4,7 @@ describe('bubbleSort', function () {
   it('should exist', function () {
     expect(typeof bubbleSort).toBe(
       'function',
-      "did you remember to define the 'bubbleSort' function?");
+      "'bubbleSort' should be a function");
   });
 
   it('should sort numbers in ascending order', function () {
